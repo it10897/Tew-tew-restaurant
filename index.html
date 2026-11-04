@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green Rice Field Restaurant - บ้านนา คาเฟ่</title>
+  <title>ทิวทิว คาเฟ่ & Restaurant</title>
   
-  <!-- โหลดไลบรารี Supabase ผ่าน CDN สำหรับเชื่อมต่อฐานข้อมูลบนคลาวด์ -->
+  <!-- โหลดไลบรารี Supabase ผ่าน CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -149,6 +149,11 @@
     .hero-btn.secondary {
       background-color: #2980b9;
       box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+    }
+
+    .hero-btn.warning {
+      background-color: #e67e22;
+      box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
     }
 
     .hero-btn:hover {
@@ -374,7 +379,7 @@
   <!-- แถบเมนูด้านบน -->
   <header>
     <div class="marquee-container" onclick="switchTab('home')">
-      <div class="marquee-text">🌾 Baan Na Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
+      <div class="marquee-text">🌾 TAW TAW Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
     </div>
     <div class="nav-tabs">
       <button id="btnHome" class="active" onclick="switchTab('home')">หน้าแรก</button>
@@ -387,10 +392,11 @@
     <!-- หน้าแรก -->
     <div id="homeTab" class="tab-content active">
       <div class="hero-section">
-        <h2>🌿 ยินดีต้อนรับสู่ บ้านนา คาเฟ่ แอนด์ เรสเตอรองต์</h2>
-        <p>สัมผัสบรรยากาศความร่มรื่นกลางทุ่งนา ลิ้มรสอาหารพื้นบ้านและเครื่องดื่มสูตรพิเศษ พร้อมบริการสั่งอาหารและเว็บบอร์ดรีวิวผ่านระบบคลาวด์</p>
+        <h2>🌿 ยินดีต้อนรับสู่ ทิว ทิว คาเฟ่ แอนด์ เรสเตอรองต์</h2>
+        <p>สัมผัสบรรยากาศความร่มรื่นกลางทุ่งนา ลิ้มรสอาหารพื้นบ้าน เครื่องดื่ม และบริการจองโต๊ะล่วงหน้าออนไลน์</p>
         <div class="hero-actions">
-          <button class="hero-btn" onclick="switchTab('customer')">🍽️ เข้าสู่ระบบสั่งอาหาร</button>
+          <button class="hero-btn" onclick="switchTab('customer')">🍽️ สั่งอาหาร</button>
+          <button class="hero-btn warning" onclick="switchTab('reservation')">📅 จองโต๊ะล่วงหน้า</button>
           <button class="hero-btn secondary" onclick="switchTab('webboard')">💬 เว็บบอร์ดรีวิว</button>
         </div>
       </div>
@@ -423,6 +429,47 @@
       </div>
     </div>
 
+    <!-- หน้าจองโต๊ะล่วงหน้า (Table Reservation) -->
+    <div id="reservationTab" class="tab-content">
+      <div style="margin-bottom: 1rem;">
+        <button class="btn" style="background-color: #57606f;" onclick="switchTab('home')">⬅️ กลับหน้าแรก</button>
+      </div>
+      <div class="section-card" style="max-width: 600px; margin: 0 auto;">
+        <h2>📅 ฟอร์มจองโต๊ะล่วงหน้า (Table Reservation)</h2>
+        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">กรอกข้อมูลเพื่อจองโต๊ะล่วงหน้ากับทางร้าน บรรยากาศวิวทุ่งนาธรรมชาติ</p>
+        
+        <form id="reservationForm" onsubmit="submitReservation(event)">
+          <div class="form-group">
+            <label>ชื่อ-นามสกุล ผู้จอง</label>
+            <input type="text" id="resName" placeholder="ระบุชื่อของคุณ" required>
+          </div>
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ที่ติดต่อได้</label>
+            <input type="tel" id="resPhone" placeholder="0891234567" required>
+          </div>
+          <div class="form-group">
+            <label>วันที่ต้องการเข้ามาใช้บริการ</label>
+            <input type="date" id="resDate" required>
+          </div>
+          <div class="form-group">
+            <label>เวลาที่ต้องการจอง</label>
+            <input type="time" id="resTime" required>
+          </div>
+          <div class="form-group">
+            <label>จำนวนลูกค้า (ท่าน)</label>
+            <input type="number" id="resGuests" min="1" max="20" value="2" required>
+          </div>
+          <div class="form-group">
+            <label>เลือกโซน / โต๊ะที่ต้องการ (โต๊ะ 1 - 25)</label>
+            <select id="resTableSelect" required>
+              <option value="" disabled selected>-- เลือกหมายเลขโต๊ะ --</option>
+            </select>
+          </div>
+          <button type="submit" class="btn warning" style="width: 100%; padding: 0.8rem; font-size: 1.05rem;">📌 ยืนยันการจองโต๊ะ</button>
+        </form>
+      </div>
+    </div>
+
     <!-- เว็บบอร์ดรีวิว -->
     <div id="webboardTab" class="tab-content">
       <div style="margin-bottom: 1rem;">
@@ -430,7 +477,7 @@
       </div>
       <div class="section-card">
         <h2>💬 เว็บบอร์ดแสดงความคิดเห็นและรีวิวจากลูกค้า</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">แบ่งปันความประทับใจ ติชม หรือแนะนำเมนูเด็ด (เชื่อมต่อฐานข้อมูล Supabase)</p>
+        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">แบ่งปันความประทับใจ ติชม หรือแนะนำเมนูเด็ด</p>
         
         <form id="webboardForm" onsubmit="addPost(event)">
           <div class="form-group">
@@ -573,6 +620,25 @@
 
         </div>
 
+        <!-- โมดุลจัดการการจองโต๊ะ (สำหรับ Staff และ Admin) -->
+        <div class="section-card admin-full-width" style="margin-top: 1.5rem;">
+          <h2>📅 รายการจองโต๊ะล่วงหน้าจากลูกค้า (Table Reservations)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ชื่อผู้จอง</th>
+                <th>เบอร์โทร</th>
+                <th>วันที่ / เวลา</th>
+                <th>จำนวน (ท่าน)</th>
+                <th>โต๊ะที่เลือก</th>
+                <th>สถานะ</th>
+                <th style="text-align: center;">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="reservationTableList"></tbody>
+          </table>
+        </div>
+
         <!-- โมดุลจัดการออเดอร์ -->
         <div class="section-card admin-full-width" style="margin-top: 1.5rem;">
           <h2>📋 รายการคำสั่งซื้อจากลูกค้า (Orders & Billing)</h2>
@@ -614,7 +680,7 @@
 
   <script>
     /* ==========================================================================
-       [ตั้งค่าการเชื่อมต่อ Supabase - นำ Project URL และ Publishable Key มาใส่ตรงนี้]
+       [ตั้งค่าการเชื่อมต่อ Supabase - ใส่ Project URL และ Publishable Key ของคุณ]
        ========================================================================== */
     const SUPABASE_URL = 'https://fymexgylzpbeoakodkap.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_qwOJ4st9LJ0ecqS6RGepVQ_TjZxlxv9';
@@ -625,13 +691,24 @@
     let cart = []; // เก็บสินค้าในตะกร้าชั่วคราว
 
     /**
-     * สร้างตัวเลือกโต๊ะ 1-25
+     * สร้างตัวเลือกโต๊ะ 1-25 สำหรับหน้าร้านและหน้าจอง
      */
-    function initTableSelect() {
+    function initTableSelects() {
       const tableSelect = document.getElementById('tableNumber');
-      tableSelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>';
-      for (let i = 1; i <= 25; i++) {
-        tableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
+      const resTableSelect = document.getElementById('resTableSelect');
+      
+      if (tableSelect) {
+        tableSelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>';
+        for (let i = 1; i <= 25; i++) {
+          tableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
+        }
+      }
+
+      if (resTableSelect) {
+        resTableSelect.innerHTML = '<option value="" disabled selected>-- เลือกหมายเลขโต๊ะ --</option>';
+        for (let i = 1; i <= 25; i++) {
+          resTableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
+        }
       }
     }
 
@@ -641,6 +718,7 @@
     function switchTab(tab) {
       document.getElementById('homeTab').classList.remove('active');
       document.getElementById('customerTab').classList.remove('active');
+      document.getElementById('reservationTab').classList.remove('active');
       document.getElementById('webboardTab').classList.remove('active');
       document.getElementById('adminTab').classList.remove('active');
       
@@ -653,6 +731,8 @@
       } else if (tab === 'customer') {
         document.getElementById('customerTab').classList.add('active');
         loadCustomerMenus();
+      } else if (tab === 'reservation') {
+        document.getElementById('reservationTab').classList.add('active');
       } else if (tab === 'webboard') {
         document.getElementById('webboardTab').classList.add('active');
         loadWebboardPosts();
@@ -660,6 +740,38 @@
         document.getElementById('adminTab').classList.add('active');
         document.getElementById('btnAdmin').classList.add('active');
         checkAdminSession();
+      }
+    }
+
+    /**
+     * บันทึกข้อมูลการจองโต๊ะลงตาราง reservations ใน Supabase
+     */
+    async function submitReservation(e) {
+      e.preventDefault();
+      const name = document.getElementById('resName').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const date = document.getElementById('resDate').value;
+      const time = document.getElementById('resTime').value;
+      const guests = parseInt(document.getElementById('resGuests').value);
+      const table = document.getElementById('resTableSelect').value;
+
+      const newReservation = {
+        name,
+        phone,
+        date,
+        time,
+        guests,
+        table_number: table,
+        status: 'รออนุมัติ'
+      };
+
+      const { error } = await _supabase.from('reservations').insert([newReservation]);
+      if (error) {
+        alert('เกิดข้อผิดพลาดในการจองโต๊ะ: ' + error.message);
+      } else {
+        alert('จองโต๊ะสำเร็จ! ทางร้านจะติดต่อกลับเพื่อยืนยันสิทธิ์');
+        document.getElementById('reservationForm').reset();
+        switchTab('home');
       }
     }
 
@@ -735,7 +847,7 @@
           loadAdminData();
         } else {
           document.getElementById('managerOnlySection').style.display = 'none';
-          loadOrdersOnly();
+          loadOrdersAndReservationsOnly();
         }
       } else {
         document.getElementById('adminLoginBox').style.display = 'block';
@@ -806,7 +918,7 @@
           </div>
         `;
       });
-      window.cachedMenus = menus; // เก็บแคชไว้ใช้งานตอนกดสั่งซื้อ
+      window.cachedMenus = menus;
       updateCartUI();
     }
 
@@ -845,9 +957,6 @@
       cartTotal.innerText = total;
     }
 
-    /**
-     * ส่งออเดอร์เข้าตาราง orders ใน Supabase
-     */
     async function checkout() {
       const tableNumber = document.getElementById('tableNumber').value;
       if (!tableNumber) { alert('กรุณาเลือกหมายเลขโต๊ะก่อนยืนยันการสั่งอาหารครับ'); return; }
@@ -874,48 +983,86 @@
     }
 
     /**
-     * โหลดรายการออเดอร์สำหรับพนักงาน
+     * โหลดข้อมูลการจองและออเดอร์สำหรับพนักงาน
      */
-    async function loadOrdersOnly() {
-      const { data: orders, error } = await _supabase.from('orders').select('*');
-      const orderTableList = document.getElementById('orderTableList');
-      orderTableList.innerHTML = '';
+    async function loadOrdersAndReservationsOnly() {
+      // โหลดการจองโต๊ะ
+      const { data: reservations } = await _supabase.from('reservations').select('*');
+      const reservationTableList = document.getElementById('reservationTableList');
+      if (reservationTableList) {
+        reservationTableList.innerHTML = '';
+        if (!reservations || reservations.length === 0) {
+          reservationTableList.innerHTML = `<tr><td colspan="7" style="text-align:center;">ยังไม่มีรายการจองโต๊ะล่วงหน้า</td></tr>`;
+        } else {
+          reservations.reverse().forEach(res => {
+            let statusClass = res.status === 'อนุมัติแล้ว' ? 'status-completed' : 'status-pending';
+            let actionBtn = res.status === 'รออนุมัติ' 
+              ? `<button class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="approveReservation(${res.id})">อนุมัติการจอง</button>`
+              : `<span style="color:var(--success); font-weight:600;">เรียบร้อย</span>`;
 
-      if (error || !orders || orders.length === 0) {
-        orderTableList.innerHTML = `<tr><td colspan="6" style="text-align:center;">ยังไม่มีรายการสั่งซื้อ</td></tr>`;
-        return;
+            reservationTableList.innerHTML += `
+              <tr>
+                <td><strong>${res.name}</strong></td>
+                <td>${res.phone}</td>
+                <td>${res.date} / ${res.time}</td>
+                <td>${res.guests} ท่าน</td>
+                <td><strong>${res.table_number}</strong></td>
+                <td><span class="${statusClass}">${res.status}</span></td>
+                <td style="text-align: center;">${actionBtn}</td>
+              </tr>
+            `;
+          });
+        }
       }
 
-      orders.reverse().forEach((order) => {
-        let itemsStr = Array.isArray(order.items) ? order.items.map(i => `${i.name} (x${i.qty})`).join(', ') : 'รายการอาหาร';
-        let statusClass = order.status === 'จัดส่งแล้ว' ? 'status-completed' : 'status-pending';
-        
-        let actionBtn = '';
-        if (order.status === 'กำลังทำอาหาร') {
-          actionBtn = `<button class="btn btn-success" onclick="updateOrderStatus('${order.id}')">เปลี่ยนเป็นจัดส่งแล้ว</button>`;
+      // โหลดออเดอร์อาหาร
+      const { data: orders } = await _supabase.from('orders').select('*');
+      const orderTableList = document.getElementById('orderTableList');
+      if (orderTableList) {
+        orderTableList.innerHTML = '';
+        if (!orders || orders.length === 0) {
+          orderTableList.innerHTML = `<tr><td colspan="6" style="text-align:center;">ยังไม่มีรายการสั่งซื้อ</td></tr>`;
         } else {
-          actionBtn = `<button class="btn btn-info" onclick="openReceipt('${order.id}')">🧾 เชคบิล/ใบเสร็จ</button>`;
-        }
+          orders.reverse().forEach((order) => {
+            let itemsStr = Array.isArray(order.items) ? order.items.map(i => `${i.name} (x${i.qty})`).join(', ') : 'รายการอาหาร';
+            let statusClass = order.status === 'จัดส่งแล้ว' ? 'status-completed' : 'status-pending';
+            
+            let actionBtn = order.status === 'กำลังทำอาหาร'
+              ? `<button class="btn btn-success" onclick="updateOrderStatus('${order.id}')">เปลี่ยนเป็นจัดส่งแล้ว</button>`
+              : `<button class="btn btn-info" onclick="openReceipt('${order.id}')">🧾 เชคบิล/ใบเสร็จ</button>`;
 
-        orderTableList.innerHTML += `
-          <tr>
-            <td>${order.id}</td>
-            <td><strong>${order.customer}</strong></td>
-            <td>${itemsStr}</td>
-            <td>${order.total} บาท</td>
-            <td><span class="${statusClass}">${order.status}</span></td>
-            <td style="text-align: center;">${actionBtn}</td>
-          </tr>
-        `;
-      });
-      window.cachedOrders = orders;
+            orderTableList.innerHTML += `
+              <tr>
+                <td>${order.id}</td>
+                <td><strong>${order.customer}</strong></td>
+                <td>${itemsStr}</td>
+                <td>${order.total} บาท</td>
+                <td><span class="${statusClass}">${order.status}</span></td>
+                <td style="text-align: center;">${actionBtn}</td>
+              </tr>
+            `;
+          });
+          window.cachedOrders = orders;
+        }
+      }
+    }
+
+    /**
+     * อนุมัติการจองโต๊ะ
+     */
+    async function approveReservation(id) {
+      const { error } = await _supabase.from('reservations').update({ status: 'อนุมัติแล้ว' }).eq('id', id);
+      if (error) {
+        alert('เกิดข้อผิดพลาด: ' + error.message);
+      } else {
+        checkAdminSession();
+      }
     }
 
     /**
      * โหลดข้อมูลหลังบ้านทั้งหมดสำหรับ Admin
      */
     async function loadAdminData() {
-      // โหลดพนักงาน
       const { data: staffs } = await _supabase.from('staffs').select('*');
       const staffTableList = document.getElementById('staffTableList');
       staffTableList.innerHTML = '';
@@ -935,7 +1082,6 @@
         });
       }
 
-      // โหลดเมนู
       const { data: menus } = await _supabase.from('menus').select('*');
       const adminMenuList = document.getElementById('adminMenuList');
       adminMenuList.innerHTML = '';
@@ -959,12 +1105,9 @@
         });
       }
 
-      loadOrdersOnly();
+      loadOrdersAndReservationsOnly();
     }
 
-    /**
-     * บันทึกพนักงานลง Supabase
-     */
     async function saveStaff(e) {
       e.preventDefault();
       const editId = document.getElementById('editStaffId').value;
@@ -1014,9 +1157,6 @@
       }
     }
 
-    /**
-     * บันทึกเมนูอาหารลง Supabase
-     */
     async function saveMenu(e) {
       e.preventDefault();
       const editId = document.getElementById('editMenuId').value;
@@ -1066,9 +1206,6 @@
       }
     }
 
-    /**
-     * อัปเดตสถานะออเดอร์
-     */
     async function updateOrderStatus(orderId) {
       const { error } = await _supabase.from('orders').update({ status: 'จัดส่งแล้ว' }).eq('id', orderId);
       if (error) {
@@ -1078,9 +1215,6 @@
       }
     }
 
-    /**
-     * เปิดใบเสร็จ
-     */
     function openReceipt(orderId) {
       const orders = window.cachedOrders || [];
       const order = orders.find(o => o.id === orderId);
@@ -1114,7 +1248,7 @@
     }
 
     // เริ่มต้นระบบ
-    initTableSelect();
+    initTableSelects();
     switchTab('home');
   </script>
 </body>
