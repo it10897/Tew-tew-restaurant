@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ทิว ทิว คาเฟ่ แอนด์ เรสเตอรองต์</title>
+  <title>Taw Taw Cafe & Restaurant</title>
   
   <!-- โหลดไลบรารี Supabase ผ่าน CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -323,7 +323,7 @@
   <!-- แถบเมนูด้านบน -->
   <header>
     <div class="marquee-container" onclick="switchTab('home')">
-      <div class="marquee-text">🌾 TAW TAW Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
+      <div class="marquee-text">🌾 Taw Taw Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
     </div>
     <div class="nav-tabs">
       <button id="btnHome" class="active" onclick="switchTab('home')">หน้าแรก</button>
@@ -367,7 +367,7 @@
           <div class="form-group">
             <label>เลือกหมายเลขโต๊ะอาหาร (โต๊ะ 1 - 25)</label>
             <select id="tableNumber">
-              <option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>
+              <option value="" disabled selected>-- กำลังโหลดข้อมูลโต๊ะว่าง --</option>
             </select>
           </div>
           <button class="btn" onclick="checkout()" style="width: 100%; padding: 0.8rem; font-size: 1rem;">ยืนยันการสั่งอาหาร</button>
@@ -596,18 +596,38 @@
 
     let cart = [];
 
+    /**
+     * โหลดโต๊ะสำหรับหน้าสั่งอาหาร โดยเช็กโต๊ะที่ถูกจองใน "วันปัจจุบัน" แล้วล็อกไว้ไม่ให้เลือกซ้ำ
+     */
     async function initTableSelects() {
       const tableSelect = document.getElementById('tableNumber');
-      if (tableSelect) {
-        tableSelect.innerHTML = '<option value="" disabled selected>-- เลือกโต๊ะ --</option>';
-        for (let i = 1; i <= 25; i++) {
-          tableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
+      if (!tableSelect) return;
+
+      const todayStr = new Date().toISOString().split('T')[0]; // วันที่ปัจจุบันรูปแบบ YYYY-MM-DD
+      const { data: reservations } = await _supabase.from('reservations').select('*');
+
+      const bookedTablesToday = [];
+      if (reservations) {
+        reservations.forEach(res => {
+          if (res.date === todayStr && res.status === 'อนุมัติแล้ว') {
+            bookedTablesToday.push(res.table_number);
+          }
+        });
+      }
+
+      tableSelect.innerHTML = '<option value="" disabled selected>-- เลือกโต๊ะอาหาร --</option>';
+      for (let i = 1; i <= 25; i++) {
+        let tableName = `โต๊ะ ${i}`;
+        if (bookedTablesToday.includes(tableName)) {
+          tableSelect.innerHTML += `<option value="${tableName}" disabled style="color: #ccc; background: #f1f2f6;">${tableName} (มีจองล่วงหน้าวันนี้)</option>`;
+        } else {
+          tableSelect.innerHTML += `<option value="${tableName}">${tableName} (ว่าง)</option>`;
         }
       }
     }
 
     /**
-     * กรองโต๊ะที่ไม่ให้เลือกซ้ำ (เช็กจากการจองที่มีสถานะ 'อนุมัติแล้ว' ในวันเดียวกัน)
+     * กรองโต๊ะสำหรับหน้าฟอร์มจองล่วงหน้า (ตามวันที่ผู้ใช้เลือกในปฏิทิน)
      */
     async function updateAvailableTables() {
       const dateInput = document.getElementById('resDate').value;
@@ -618,10 +638,7 @@
         return;
       }
 
-      // ดึงข้อมูลการจองทั้งหมดใน Supabase
       const { data: reservations } = await _supabase.from('reservations').select('*');
-      
-      // หาหมายเลขโต๊ะที่ถูกจองและได้รับอนุมัติแล้วในวันนั้น
       const bookedTables = [];
       if (reservations) {
         reservations.forEach(res => {
@@ -657,6 +674,7 @@
         document.getElementById('btnHome').classList.add('active');
       } else if (tab === 'customer') {
         document.getElementById('customerTab').classList.add('active');
+        initTableSelects(); // อัปเดตสถานะโต๊ะว่างทุกครั้งที่กดเข้ามาหน้าสั่งอาหาร
         loadCustomerMenus();
       } else if (tab === 'reservation') {
         document.getElementById('reservationTab').classList.add('active');
@@ -838,7 +856,7 @@
 
       const { error } = await _supabase.from('orders').insert([newOrder]);
       if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } 
-      else { alert('สั่งอาหารจาก ' + tableNumber + ' สำเร็จ!'); cart = []; document.getElementById('tableNumber').selectedIndex = 0; updateCartUI(); }
+      else { alert('สั่งอาหารจาก ' + tableNumber + ' สำเร็จ!'); cart = []; initTableSelects(); updateCartUI(); }
     }
 
     async function loadOrdersAndReservationsOnly() {
@@ -878,9 +896,7 @@
             let itemsStr = Array.isArray(order.items) ? order.items.map(i => `${i.name} (x${i.qty})`).join(', ') : 'รายการอาหาร';
             let statusClass = order.status === 'จัดส่งแล้ว' ? 'status-completed' : 'status-pending';
             
-            // แสดงสถานะและชื่อพนักงานผู้รับออเดอร์
             let statusDisplay = `<span class="${statusClass}">${order.status}</span><br><small style="color:#666;">รับโดย: ${order.staff || '-'}</small>`;
-
             let actionBtn = order.status === 'กำลังทำอาหาร'
               ? `<button class="btn btn-success" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="updateOrderStatus('${order.id}')">ส่งอาหาร</button>`
               : `<button class="btn btn-info" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="openReceipt('${order.id}')">บิล</button>`;
@@ -904,9 +920,6 @@
       checkAdminSession();
     }
 
-    /**
-     * เปลี่ยนสถานะออเดอร์พร้อมบันทึกชื่อพนักงานที่กดทำรายการปัจจุบัน
-     */
     async function updateOrderStatus(orderId) {
       const currentStaff = JSON.parse(sessionStorage.getItem('currentStaff'));
       const staffName = currentStaff ? currentStaff.username : 'Staff';
