@@ -316,6 +316,13 @@
       #printableReceipt { position: absolute; left: 0; top: 0; width: 100%; border: none; }
       .no-print { display: none; }
     }
+    /* เพิ่มส่วนนี้ลงไปในแท็ก <style> */
+    .btn-icon {
+      font-size: 1.3rem; /* ปรับขนาดความใหญ่ของไอคอน */
+      margin-right: 6px;  /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
+      vertical-align: middle;
+    }
+
   </style>
 </head>
 <body>
@@ -338,11 +345,11 @@
       <div class="hero-section">
         <h2>🌿 ยินดีต้อนรับสู่ ทิวคาเฟ่ แอนด์ เรสเตอรองต์</h2>
         <p>สัมผัสบรรยากาศความร่มรื่นกลางทุ่งนา ลิ้มรสอาหารพื้นบ้าน เครื่องดื่ม และบริการจองโต๊ะล่วงหน้าออนไลน์</p>
-        <div class="hero-actions">
-          <button class="hero-btn" onclick="switchTab('customer')">🍽️ สั่งอาหาร</button>
-          <button class="hero-btn warning" onclick="switchTab('reservation')">📅 จองโต๊ะ</button>
-          <button class="hero-btn secondary" onclick="switchTab('webboard')">💬 รีวิว</button>
-        </div>
+           <div class="hero-actions">
+     <button class="hero-btn" onclick="switchTab('customer')"><span class="btn-icon">🍽️</span> สั่งอาหาร</button>
+     <button class="hero-btn warning" onclick="switchTab('reservation')"><span class="btn-icon">📅</span> จองโต๊ะ</button>
+     <button class="hero-btn secondary" onclick="switchTab('webboard')"><span class="btn-icon">💬</span> รีวิว</button>
+   </div>
       </div>
     </div>
 
