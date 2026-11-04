@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green Rice Field Restaurant</title>
+  <title>Green Rice Field Restaurant - บ้านนา คาเฟ่</title>
+  
+  <!-- โหลดไลบรารี Supabase ผ่าน CDN สำหรับเชื่อมต่อฐานข้อมูลบนคลาวด์ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     /* [ส่วนที่ 1]: กำหนดค่าตัวแปรสีและธีมหลักของเว็บไซต์ (CSS Variables) */
     :root {
@@ -46,11 +50,11 @@
       z-index: 100;
     }
 
-    /* [ส่วนใหม่]: เอฟเฟกต์ตัวหนังสือวิ่ง (Marquee Animation) สำหรับชื่อร้าน */
+    /* เอฟเฟกต์ตัวหนังสือวิ่ง (Marquee Animation) สำหรับชื่อร้าน */
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      width: 280px;
+      width: 320px;
       cursor: pointer;
     }
 
@@ -58,7 +62,7 @@
       display: inline-block;
       animation: marquee 12s linear infinite;
       color: var(--primary);
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 800;
     }
 
@@ -100,7 +104,7 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* ดีไซน์หน้า Home Page ต้อนรับ พร้อมปุ่มเข้าสู่ระบบสั่งอาหารและเว็บบอร์ด */
+    /* ดีไซน์หน้า Home Page ต้อนรับ (ข้อความเรียงแถวเดียวแนวนอน) */
     .hero-section {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
@@ -179,7 +183,7 @@
       padding-bottom: 0.5rem;
     }
 
-    /* สไตล์โพสต์เว็บบอร์ด */
+    /* สไตล์โพสต์เว็บบอร์ดรีวิว */
     .post-card {
       background: #ffffff;
       padding: 1.2rem;
@@ -208,7 +212,7 @@
       line-height: 1.5;
     }
 
-    /* เลย์เอาต์หลังบ้านแบบแนวนอน แบ่งแยกเป็นโมดุลด้วยระบบ Grid */
+    /* [ส่วนสำคัญ]: เลย์เอาต์หลังบ้านแบบแนวนอน แบ่งแยกเป็นโมดุลด้วยระบบ Grid */
     .admin-grid-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -386,10 +390,10 @@
 </head>
 <body>
 
-  <!-- แถบเมนูด้านบนพร้อมเอฟเฟกต์ตัวหนังสือวิ่ง (Marquee) -->
+  <!-- แถบเมนูด้านบนพร้อมชื่อร้านวิ่งได้ -->
   <header>
     <div class="marquee-container" onclick="switchTab('home')">
-      <div class="marquee-text">🌾 Tew Tew Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
+      <div class="marquee-text">🌾 Baan Na Cafe & Restaurant 🌿 ยินดีต้อนรับทุกท่านสู่บรรยากาศธรรมชาติ</div>
     </div>
     <div class="nav-tabs">
       <button id="btnHome" class="active" onclick="switchTab('home')">หน้าแรก</button>
@@ -399,10 +403,10 @@
 
   <div class="container">
     
-    <!-- [ส่วนที่ 3]: หน้า Home Page แรก (ข้อความบรรยายเรียงแถวเดียวแนวนอน) -->
+    <!-- [ส่วนที่ 3]: หน้า Home Page แรก -->
     <div id="homeTab" class="tab-content active">
       <div class="hero-section">
-        <h2>🌿 ยินดีต้อนรับสู่ พี่ทิว คาเฟ่ แอนด์ เรสเตอรองต์</h2>
+        <h2>🌿 ยินดีต้อนรับสู่ บ้านนา คาเฟ่ แอนด์ เรสเตอรองต์</h2>
         <p>สัมผัสบรรยากาศความร่มรื่นกลางทุ่งนา ลิ้มรสอาหารพื้นบ้านและเครื่องดื่มสูตรพิเศษ พร้อมบริการสั่งอาหารและเว็บบอร์ดรีวิว</p>
         <div class="hero-actions">
           <button class="hero-btn" onclick="switchTab('customer')">🍽️ เข้าสู่ระบบสั่งอาหาร</button>
@@ -411,7 +415,7 @@
       </div>
     </div>
 
-    <!-- [ส่วนที่ 4]: หน้าร้านสำหรับลูกค้าเลือกอาหารและโต๊ะ -->
+    <!-- [ส่วนที่ 4]: หน้าร้านสำหรับลูกค้าเลือกอาหารและโต๊ะ (1-25) -->
     <div id="customerTab" class="tab-content">
       <div style="margin-bottom: 1rem;">
         <button class="btn" style="background-color: #57606f;" onclick="switchTab('home')">⬅️ กลับหน้าแรก</button>
@@ -422,14 +426,13 @@
       </div>
 
       <div class="section-card">
-        <h2>🛒 ออเดอร์ของคุณ</h2>
-        <div id="cartList" style="margin-top: 1rem; color: #57606f;">ยังไม่มีออเดอร์</div>
+        <h2>🛒 ตะกร้าสินค้าของคุณ</h2>
+        <div id="cartList" style="margin-top: 1rem; color: #57606f;">ยังไม่มีสินค้าในตะกร้า</div>
         <h3 style="margin-top: 1rem; font-size: 1.2rem;">ยอดรวมสุทธิ: <span id="cartTotal" style="color: var(--primary);">0</span> บาท</h3>
         
         <div style="margin-top: 1.5rem;">
           <div class="form-group">
-            <label>เลือกหมายเลขโต๊ะอาหาร</label>
-            <!-- ตัวเลือกโต๊ะ 1 ถึง 25 -->
+            <label>เลือกหมายเลขโต๊ะอาหาร (โต๊ะ 1 - 25)</label>
             <select id="tableNumber">
               <option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>
             </select>
@@ -448,7 +451,6 @@
         <h2>💬 เว็บบอร์ดแสดงความคิดเห็นและรีวิวจากลูกค้า</h2>
         <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">แบ่งปันความประทับใจ ติชม หรือแนะนำเมนูเด็ดให้กับเราได้ที่นี่ครับ</p>
         
-        <!-- ฟอร์มโพสต์ความคิดเห็นใหม่ -->
         <form id="webboardForm" onsubmit="addPost(event)">
           <div class="form-group">
             <label>ชื่อผู้แสดงความคิดเห็น</label>
@@ -462,14 +464,13 @@
         </form>
       </div>
 
-      <!-- ส่วนแสดงรายการกระทู้/ความคิดเห็นทั้งหมด -->
       <div class="section-card">
         <h2>🗣️ กระทู้ความคิดเห็นทั้งหมด</h2>
         <div id="boardPostList" style="margin-top: 1rem;"></div>
       </div>
     </div>
 
-    <!-- [ส่วนที่ 6]: ระบบหลังบ้าน (Admin Dashboard แบบโมดูลแนวนอน) -->
+    <!-- [ส่วนที่ 6]: ระบบหลังบ้าน (Admin Dashboard แบบโมดุลแนวนอน) -->
     <div id="adminTab" class="tab-content">
       <div style="margin-bottom: 1rem;">
         <button class="btn" style="background-color: #57606f;" onclick="switchTab('home')">⬅️ กลับหน้าแรก</button>
@@ -490,10 +491,9 @@
         <button class="btn" onclick="verifyAdmin()" style="width: 100%;">เข้าสู่ระบบ</button>
       </div>
 
-      <!-- แผงควบคุมหลังบ้านหลัก (แสดงผลเมื่อเข้าสู่ระบบสำเร็จ) -->
+      <!-- แผงควบคุมหลังบ้านหลัก -->
       <div id="adminDashboard" style="display: none;">
         
-        <!-- แถบต้อนรับด้านบนและปุ่มออกจากระบบ -->
         <div class="section-card" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; background: var(--bg-dark); color: #fff;">
           <div>
             <h2 style="color: #fff; border: none; margin: 0; font-size: 1.3rem;">🛠️ ระบบจัดการหลังบ้าน</h2>
@@ -502,13 +502,12 @@
           <button class="btn btn-danger" onclick="adminLogout()" style="padding: 0.4rem 1rem;">ออกจากระบบ</button>
         </div>
 
-        <!-- [โมดุลจัดการสำหรับผู้จัดการร้าน / Admin สูงสุดเท่านั้น] -->
+        <!-- [โมดุลจัดการสำหรับผู้จัดการร้าน / Admin เท่านั้น] -->
         <div id="managerOnlySection" style="display: none;">
           
-          <!-- แถวที่ 1: แบ่งเป็น 2 คอลัมน์แนวนอน (โมดุลจัดการพนักงาน | โมดุลจัดการเมนูอาหาร) -->
           <div class="admin-grid-layout">
             
-            <!-- โมดุลที่ 1: ฟอร์มและตารางจัดการบัญชีพนักงาน -->
+            <!-- โมดุลที่ 1: จัดการพนักงาน -->
             <div class="section-card" style="margin-bottom: 0;">
               <h2 id="staffFormTitle">👤 จัดการบัญชีพนักงาน</h2>
               <form id="addStaffForm" onsubmit="saveStaff(event)">
@@ -534,7 +533,6 @@
                 </div>
               </form>
 
-              <!-- ตารางรายชื่อพนักงานย่อส่วนในโมดุล -->
               <div style="margin-top: 1.5rem; max-height: 200px; overflow-y: auto;">
                 <table>
                   <thead>
@@ -549,7 +547,7 @@
               </div>
             </div>
 
-            <!-- โมดุลที่ 2: ฟอร์มเพิ่ม/แก้ไข เมนูอาหาร -->
+            <!-- โมดุลที่ 2: จัดการเมนูอาหาร -->
             <div class="section-card" style="margin-bottom: 0;">
               <h2 id="formTitle">➕ จัดการเมนูอาหาร</h2>
               <form id="addMenuForm" onsubmit="saveMenu(event)">
@@ -575,7 +573,6 @@
 
           </div>
 
-          <!-- แถวที่ 2: ตารางแสดงรายการอาหารทั้งหมดในระบบ (แสดงเต็มความกว้าง) -->
           <div class="section-card" style="margin-top: 1.5rem;">
             <h2>🍔 รายการอาหารทั้งหมดในระบบ</h2>
             <div style="max-height: 250px; overflow-y: auto;">
@@ -593,9 +590,9 @@
             </div>
           </div>
 
-        </div> <!-- จบส่วน Manager Only Section -->
+        </div>
 
-        <!-- แถวที่ 3: โมดุลจัดการคำสั่งซื้อและเชคบิลของลูกค้า (แสดงเต็มความกว้าง สำหรับพนักงานทุกระดับ) -->
+        <!-- โมดุลจัดการออเดอร์ (เต็มความกว้าง) -->
         <div class="section-card admin-full-width" style="margin-top: 1.5rem;">
           <h2>📋 รายการคำสั่งซื้อจากลูกค้า (Orders & Billing)</h2>
           <table>
@@ -617,7 +614,7 @@
     </div>
   </div>
 
-  <!-- Modal หน้าต่างแสดงใบเสร็จรับเงิน (Bill / Receipt) -->
+  <!-- Modal หน้าต่างใบเสร็จรับเงิน -->
   <div id="receiptModal" class="modal">
     <div class="modal-content">
       <div id="printableReceipt">
@@ -635,7 +632,21 @@
   </div>
 
   <script>
-    // [จำลองฐานข้อมูลพนักงาน]: สร้างบัญชีเริ่มต้น (Admin และ Staff)
+    /* ==========================================================================
+       [ส่วนเชื่อมต่อฐานข้อมูล Supabase - สามารถนำ URL และ Key มาใส่แทนด้านล่างนี้ได้]
+       ========================================================================== */
+    const SUPABASE_URL = 'ใส่_Project_URL_ของคุณที่นี่';
+    const SUPABASE_ANON_KEY = 'ใส่_Publishable_Key_ของคุณที่นี่';
+    
+    // ตรวจสอบว่าใส่ค่าหรือยัง หากยังจะใช้ระบบจำลอง LocalStorage สำรองไว้ก่อน
+    const useSupabase = SUPABASE_URL !== 'ใส่_Project_URL_ของคุณที่นี่';
+    let _supabase = null;
+    if (useSupabase) {
+      const { createClient } = supabase;
+      _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    // [จำลองฐานข้อมูลพนักงานเริ่มต้น]
     if (!localStorage.getItem('staffs')) {
       const initialStaffs = [
         { id: 1, username: 'admin', password: '1234', role: 'admin' },
@@ -644,7 +655,7 @@
       localStorage.setItem('staffs', JSON.stringify(initialStaffs));
     }
 
-    // [จำลองฐานข้อมูลเมนูอาหาร]: 10 เมนูเริ่มต้นพร้อมรองรับรูปภาพ
+    // [จำลองฐานข้อมูลเมนูอาหารเริ่มต้น]
     if (!localStorage.getItem('menus')) {
       const initialMenus = [
         { id: 1, name: 'ข้าวผัดกระเพราหมูสับไข่ดาว', price: 65, image: '' },
@@ -661,7 +672,7 @@
       localStorage.setItem('menus', JSON.stringify(initialMenus));
     }
 
-    // [จำลองฐานข้อมูลเว็บบอร์ด]: โพสต์เริ่มต้นในบอร์ดรีวิว
+    // [จำลองฐานข้อมูลเว็บบอร์ดรีวิวเริ่มต้น]
     if (!localStorage.getItem('posts')) {
       const initialPosts = [
         { id: 1, author: 'คุณลูกค้าโต๊ะ 5', content: 'บรรยากาศทุ่งนาร่มรื่นมากครับ ลมพัดเย็นสบาย อาหารอร่อยแซ่บจัดจ้าน!', time: '12:30:15' },
@@ -842,7 +853,7 @@
               </div>
               <div class="menu-card-action">
                 <input type="number" id="qty-${menu.id}" class="qty-input" value="1" min="1">
-                <button class="btn" style="flex: 1; padding: 0.4rem; font-size: 0.9rem;" onclick="addToCart(${menu.id})">เพิ่มออเดอร์</button>
+                <button class="btn" style="flex: 1; padding: 0.4rem; font-size: 0.9rem;" onclick="addToCart(${menu.id})">เพิ่มลงตะกร้า</button>
               </div>
             </div>
           </div>
@@ -879,7 +890,7 @@
       const cartList = document.getElementById('cartList');
       const cartTotal = document.getElementById('cartTotal');
       if (cart.length === 0) {
-        cartList.innerHTML = 'ยังไม่มีออเดอร์อาหาร';
+        cartList.innerHTML = 'ยังไม่มีสินค้าในตะกร้า';
         cartTotal.innerText = '0';
         return;
       }
@@ -915,7 +926,7 @@
       orders.push(newOrder);
       localStorage.setItem('orders', JSON.stringify(orders));
 
-      alert('ส่งรายการออเดอร์จาก ' + tableNumber + ' สำเร็จ!');
+      alert('ส่งคำสั่งซื้อจาก ' + tableNumber + ' สำเร็จ!');
       cart = [];
       document.getElementById('tableNumber').selectedIndex = 0;
       updateCartUI();
