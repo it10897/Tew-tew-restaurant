@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ทิวทิว คาเฟ่ & Restaurant</title>
+  <title>ทิว ทิว คาเฟ่ แอนด์ เรสเตอรองต์</title>
   
   <!-- โหลดไลบรารี Supabase ผ่าน CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -37,7 +37,7 @@
     header {
       background-color: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.5rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
@@ -45,12 +45,15 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      width: 320px;
+      max-width: 300px;
+      flex-grow: 1;
       cursor: pointer;
     }
 
@@ -58,7 +61,7 @@
       display: inline-block;
       animation: marquee 12s linear infinite;
       color: var(--primary);
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 800;
     }
 
@@ -67,14 +70,18 @@
       100% { transform: translateX(-100%); }
     }
 
+    .nav-tabs {
+      display: flex;
+      gap: 0.4rem;
+    }
+
     .nav-tabs button {
       background: none;
       border: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      margin-left: 0.8rem;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 30px;
       transition: all 0.3s ease;
       color: #57606f;
@@ -93,7 +100,7 @@
 
     .container {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 1.5rem auto;
       padding: 0 1rem;
     }
 
@@ -103,24 +110,24 @@
     .hero-section {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
-      padding: 4rem 2rem;
+      padding: 3rem 1.5rem;
       border-radius: 16px;
       text-align: center;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       max-width: 900px;
-      margin: 3rem auto;
+      margin: 2rem auto;
       border: 1px solid rgba(255, 255, 255, 0.4);
     }
 
     .hero-section h2 {
-      font-size: 2.3rem;
+      font-size: 2rem;
       color: var(--primary);
       margin-bottom: 1rem;
       font-weight: 800;
     }
 
     .hero-section p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: #57606f;
       margin-bottom: 2rem;
       line-height: 1.6;
@@ -129,7 +136,7 @@
     .hero-actions {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
     }
 
@@ -137,34 +144,26 @@
       background-color: var(--primary);
       color: #fff;
       border: none;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
       font-weight: 700;
       border-radius: 50px;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
       transition: all 0.3s ease;
+      flex: 1;
+      min-width: 140px;
     }
 
-    .hero-btn.secondary {
-      background-color: #2980b9;
-      box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
-    }
+    .hero-btn.secondary { background-color: #2980b9; box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4); }
+    .hero-btn.warning { background-color: #e67e22; box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4); }
 
-    .hero-btn.warning {
-      background-color: #e67e22;
-      box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
-    }
-
-    .hero-btn:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
+    .hero-btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
     .section-card {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
-      padding: 1.8rem;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.3);
       margin-bottom: 1.5rem;
@@ -173,7 +172,7 @@
 
     .section-card h2 {
       margin-bottom: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #2f3640;
       border-bottom: 2px solid var(--gray);
       padding-bottom: 0.5rem;
@@ -181,7 +180,7 @@
 
     .post-card {
       background: #ffffff;
-      padding: 1.2rem;
+      padding: 1rem;
       border-radius: 8px;
       margin-bottom: 1rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -192,20 +191,14 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #718093;
+      flex-wrap: wrap;
+      gap: 0.3rem;
     }
 
-    .post-author {
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .post-body {
-      font-size: 1rem;
-      color: #2f3640;
-      line-height: 1.5;
-    }
+    .post-author { font-weight: 700; color: var(--primary); }
+    .post-body { font-size: 0.95rem; color: #2f3640; line-height: 1.5; }
 
     .admin-grid-layout {
       display: grid;
@@ -213,17 +206,17 @@
       gap: 1.5rem;
     }
 
-    .admin-full-width {
-      grid-column: span 2;
-    }
+    .admin-full-width { grid-column: span 2; }
 
     @media (max-width: 900px) {
-      .admin-grid-layout {
-        grid-template-columns: 1fr;
-      }
-      .admin-full-width {
-        grid-column: span 1;
-      }
+      .admin-grid-layout { grid-template-columns: 1fr; }
+      .admin-full-width { grid-column: span 1; }
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
@@ -234,38 +227,32 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 550px;
     }
 
     th, td {
-      padding: 0.75rem;
+      padding: 0.7rem;
       text-align: left;
       border-bottom: 1px solid #f1f2f6;
       vertical-align: middle;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    th {
-      background-color: #f8f9fa;
-      color: #2f3640;
-      font-weight: 600;
-    }
+    th { background-color: #f8f9fa; color: #2f3640; font-weight: 600; }
 
     .btn {
       background-color: var(--primary);
       color: #ffffff;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
     }
 
-    .btn:hover {
-      background-color: var(--primary-hover);
-      transform: translateY(-1px);
-    }
-
+    .btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
     .btn-success { background-color: var(--success); }
     .btn-info { background-color: var(--info); color: #fff; }
     .btn-warning { background-color: var(--warning); color: #2f3640; }
@@ -282,86 +269,43 @@
       background: #fff;
     }
 
-    textarea { resize: vertical; min-height: 100px; }
-
-    input.qty-input {
-      width: 50px;
-      padding: 0.4rem;
-      text-align: center;
-      border: 1px solid var(--border-gray);
-      border-radius: 6px;
-    }
+    textarea { resize: vertical; min-height: 90px; }
+    input.qty-input { width: 45px; padding: 0.3rem; text-align: center; border: 1px solid var(--border-gray); border-radius: 6px; }
     
     .menu-img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid #ddd;
-      background-color: #eee;
+      width: 45px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; background-color: #eee;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
       margin-top: 1rem;
     }
 
     .menu-card {
-      background: #ffffff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s ease;
+      background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex; flex-direction: column; transition: transform 0.2s ease;
     }
-
-    .menu-card:hover { transform: translateY(-4px); }
-
-    .menu-card-img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      background-color: #eee;
-    }
-
-    .menu-card-body {
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      justify-content: space-between;
-    }
-
-    .menu-card-title { font-size: 1.05rem; font-weight: 600; color: #2f3640; margin-bottom: 0.3rem; }
-    .menu-card-price { color: var(--primary); font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; }
-    .menu-card-action { display: flex; align-items: center; gap: 0.5rem; }
+    .menu-card:hover { transform: translateY(-3px); }
+    .menu-card-img { width: 100%; height: 130px; object-fit: cover; background-color: #eee; }
+    .menu-card-body { padding: 0.9rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .menu-card-title { font-size: 1rem; font-weight: 600; color: #2f3640; margin-bottom: 0.3rem; }
+    .menu-card-price { color: var(--primary); font-weight: 700; font-size: 0.95rem; margin-bottom: 0.7rem; }
+    .menu-card-action { display: flex; align-items: center; gap: 0.4rem; }
 
     .status-pending { color: #e1b12c; font-weight: bold; }
     .status-completed { color: var(--success); font-weight: bold; }
 
     .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+      justify-content: center; align-items: center; z-index: 1000; padding: 1rem;
     }
-
     .modal-content {
-      background: #ffffff;
-      padding: 2.5rem;
-      border-radius: 12px;
-      width: 420px;
-      max-width: 90%;
+      background: #ffffff; padding: 2rem; border-radius: 12px; width: 400px; max-width: 100%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-
     .receipt-header { text-align: center; margin-bottom: 1rem; }
     .receipt-header h3 { color: var(--primary); }
 
@@ -396,13 +340,13 @@
         <p>สัมผัสบรรยากาศความร่มรื่นกลางทุ่งนา ลิ้มรสอาหารพื้นบ้าน เครื่องดื่ม และบริการจองโต๊ะล่วงหน้าออนไลน์</p>
         <div class="hero-actions">
           <button class="hero-btn" onclick="switchTab('customer')">🍽️ สั่งอาหาร</button>
-          <button class="hero-btn warning" onclick="switchTab('reservation')">📅 จองโต๊ะล่วงหน้า</button>
-          <button class="hero-btn secondary" onclick="switchTab('webboard')">💬 เว็บบอร์ดรีวิว</button>
+          <button class="hero-btn warning" onclick="switchTab('reservation')">📅 จองโต๊ะ</button>
+          <button class="hero-btn secondary" onclick="switchTab('webboard')">💬 รีวิว</button>
         </div>
       </div>
     </div>
 
-    <!-- หน้าร้านสำหรับลูกค้าเลือกอาหารและโต๊ะ (1-25) -->
+    <!-- หน้าร้านสำหรับลูกค้าเลือกอาหารและโต๊ะ -->
     <div id="customerTab" class="tab-content">
       <div style="margin-bottom: 1rem;">
         <button class="btn" style="background-color: #57606f;" onclick="switchTab('home')">⬅️ กลับหน้าแรก</button>
@@ -414,8 +358,10 @@
 
       <div class="section-card">
         <h2>🛒 ตะกร้าสินค้าของคุณ</h2>
-        <div id="cartList" style="margin-top: 1rem; color: #57606f;">ยังไม่มีสินค้าในตะกร้า</div>
-        <h3 style="margin-top: 1rem; font-size: 1.2rem;">ยอดรวมสุทธิ: <span id="cartTotal" style="color: var(--primary);">0</span> บาท</h3>
+        <div class="table-responsive">
+          <div id="cartList" style="margin-top: 1rem; color: #57606f;">ยังไม่มีสินค้าในตะกร้า</div>
+        </div>
+        <h3 style="margin-top: 1rem; font-size: 1.1rem;">ยอดรวมสุทธิ: <span id="cartTotal" style="color: var(--primary);">0</span> บาท</h3>
         
         <div style="margin-top: 1.5rem;">
           <div class="form-group">
@@ -424,19 +370,19 @@
               <option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>
             </select>
           </div>
-          <button class="btn" onclick="checkout()" style="width: 100%; padding: 0.85rem; font-size: 1.05rem;">ยืนยันการสั่งอาหาร</button>
+          <button class="btn" onclick="checkout()" style="width: 100%; padding: 0.8rem; font-size: 1rem;">ยืนยันการสั่งอาหาร</button>
         </div>
       </div>
     </div>
 
-    <!-- หน้าจองโต๊ะล่วงหน้า (Table Reservation) -->
+    <!-- หน้าจองโต๊ะล่วงหน้า -->
     <div id="reservationTab" class="tab-content">
       <div style="margin-bottom: 1rem;">
         <button class="btn" style="background-color: #57606f;" onclick="switchTab('home')">⬅️ กลับหน้าแรก</button>
       </div>
       <div class="section-card" style="max-width: 600px; margin: 0 auto;">
         <h2>📅 ฟอร์มจองโต๊ะล่วงหน้า (Table Reservation)</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">กรอกข้อมูลเพื่อจองโต๊ะล่วงหน้ากับทางร้าน บรรยากาศวิวทุ่งนาธรรมชาติ</p>
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.2rem;">เลือกวันเวลาเพื่อตรวจสอบโต๊ะว่างและจองล่วงหน้า</p>
         
         <form id="reservationForm" onsubmit="submitReservation(event)">
           <div class="form-group">
@@ -449,23 +395,23 @@
           </div>
           <div class="form-group">
             <label>วันที่ต้องการเข้ามาใช้บริการ</label>
-            <input type="date" id="resDate" required>
+            <input type="date" id="resDate" onchange="updateAvailableTables()" required>
           </div>
           <div class="form-group">
             <label>เวลาที่ต้องการจอง</label>
-            <input type="time" id="resTime" required>
+            <input type="time" id="resTime" onchange="updateAvailableTables()" required>
           </div>
           <div class="form-group">
             <label>จำนวนลูกค้า (ท่าน)</label>
             <input type="number" id="resGuests" min="1" max="20" value="2" required>
           </div>
           <div class="form-group">
-            <label>เลือกโซน / โต๊ะที่ต้องการ (โต๊ะ 1 - 25)</label>
+            <label>เลือกโซน / โต๊ะที่ต้องการ (ระบบจะกรองโต๊ะที่ไม่ว่างให้อัตโนมัติ)</label>
             <select id="resTableSelect" required>
-              <option value="" disabled selected>-- เลือกหมายเลขโต๊ะ --</option>
+              <option value="" disabled selected>-- กรุณาเลือกวันที่และเวลาก่อนเลือกโต๊ะ --</option>
             </select>
           </div>
-          <button type="submit" class="btn warning" style="width: 100%; padding: 0.8rem; font-size: 1.05rem;">📌 ยืนยันการจองโต๊ะ</button>
+          <button type="submit" class="btn warning" style="width: 100%; padding: 0.8rem; font-size: 1rem;">📌 ยืนยันการจองโต๊ะ</button>
         </form>
       </div>
     </div>
@@ -477,8 +423,6 @@
       </div>
       <div class="section-card">
         <h2>💬 เว็บบอร์ดแสดงความคิดเห็นและรีวิวจากลูกค้า</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">แบ่งปันความประทับใจ ติชม หรือแนะนำเมนูเด็ด</p>
-        
         <form id="webboardForm" onsubmit="addPost(event)">
           <div class="form-group">
             <label>ชื่อผู้แสดงความคิดเห็น</label>
@@ -505,9 +449,9 @@
       </div>
 
       <!-- หน้าต่างกรอกรหัสผ่านพนักงาน -->
-      <div id="adminLoginBox" class="section-card" style="max-width: 450px; margin: 2rem auto; text-align: center;">
+      <div id="adminLoginBox" class="section-card" style="max-width: 400px; margin: 2rem auto; text-align: center;">
         <h2>🔒 เข้าสู่ระบบพนักงาน</h2>
-        <p style="color: #666; font-size: 0.9rem; margin: 0.5rem 0 1rem 0;">(บัญชีเริ่มต้น: admin / รหัสผ่าน: 1234)</p>
+        <p style="color: #666; font-size: 0.85rem; margin: 0.5rem 0 1rem 0;">(บัญชีเริ่มต้น: admin / รหัสผ่าน: 1234)</p>
         <div class="form-group" style="text-align: left;">
           <label>ชื่อผู้ใช้งาน (Username)</label>
           <input type="text" id="loginUsername" placeholder="กรอกชื่อผู้ใช้">
@@ -522,20 +466,17 @@
       <!-- แผงควบคุมหลังบ้านหลัก -->
       <div id="adminDashboard" style="display: none;">
         
-        <div class="section-card" style="display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; background: var(--bg-dark); color: #fff;">
+        <div class="section-card" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg-dark); color: #fff; flex-wrap: wrap; gap: 0.5rem;">
           <div>
-            <h2 style="color: #fff; border: none; margin: 0; font-size: 1.3rem;">🛠️ ระบบจัดการหลังบ้าน (Supabase Database)</h2>
-            <p id="loggedInUserWelcome" style="color: #f1f2f6; font-size: 0.85rem; margin-top: 0.2rem;"></p>
+            <h2 style="color: #fff; border: none; margin: 0; font-size: 1.15rem;">🛠️ ระบบจัดการหลังบ้าน</h2>
+            <p id="loggedInUserWelcome" style="color: #f1f2f6; font-size: 0.8rem; margin-top: 0.2rem;"></p>
           </div>
-          <button class="btn btn-danger" onclick="adminLogout()" style="padding: 0.4rem 1rem;">ออกจากระบบ</button>
+          <button class="btn btn-danger" onclick="adminLogout()" style="padding: 0.35rem 0.8rem;">ออกจากระบบ</button>
         </div>
 
-        <!-- โมดุลจัดการสำหรับผู้จัดการร้าน / Admin เท่านั้น -->
+        <!-- โมดุลจัดการสำหรับ Admin -->
         <div id="managerOnlySection" style="display: none;">
-          
           <div class="admin-grid-layout">
-            
-            <!-- จัดการพนักงาน -->
             <div class="section-card" style="margin-bottom: 0;">
               <h2 id="staffFormTitle">👤 จัดการบัญชีพนักงาน</h2>
               <form id="addStaffForm" onsubmit="saveStaff(event)">
@@ -549,33 +490,25 @@
                   <input type="text" id="staffPassword" required>
                 </div>
                 <div class="form-group">
-                  <label>กำหนดสิทธิ์การใช้งาน (Role)</label>
+                  <label>สิทธิ์การใช้งาน (Role)</label>
                   <select id="staffRole">
-                    <option value="staff">พนักงานรับออเดอร์/เชคบิล (Staff)</option>
+                    <option value="staff">พนักงานรับออเดอร์ (Staff)</option>
                     <option value="admin">ผู้จัดการร้าน (Admin)</option>
                   </select>
                 </div>
                 <div style="display: flex; gap: 0.5rem;">
-                  <button type="submit" class="btn" id="saveStaffBtn" style="flex: 1;">บันทึกพนักงาน</button>
+                  <button type="submit" class="btn" id="saveStaffBtn" style="flex: 1;">บันทึก</button>
                   <button type="button" class="btn btn-danger" id="cancelStaffEditBtn" onclick="resetStaffForm()" style="display: none; flex: 1;">ยกเลิก</button>
                 </div>
               </form>
-
-              <div style="margin-top: 1.5rem; max-height: 200px; overflow-y: auto;">
+              <div class="table-responsive" style="margin-top: 1.2rem; max-height: 180px;">
                 <table>
-                  <thead>
-                    <tr>
-                      <th>ชื่อผู้ใช้</th>
-                      <th>สิทธิ์</th>
-                      <th style="text-align: center;">จัดการ</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>ชื่อผู้ใช้</th><th>สิทธิ์</th><th style="text-align: center;">จัดการ</th></tr></thead>
                   <tbody id="staffTableList"></tbody>
                 </table>
               </div>
             </div>
 
-            <!-- จัดการเมนูอาหาร -->
             <div class="section-card" style="margin-bottom: 0;">
               <h2 id="formTitle">➕ จัดการเมนูอาหาร</h2>
               <form id="addMenuForm" onsubmit="saveMenu(event)">
@@ -589,132 +522,126 @@
                   <input type="number" id="menuPrice" required>
                 </div>
                 <div class="form-group">
-                  <label>ลิงก์รูปภาพอาหาร (Image URL)</label>
-                  <input type="text" id="menuImageUrl" placeholder="https://example.com/image.jpg">
+                  <label>ลิงก์รูปภาพ (Image URL)</label>
+                  <input type="text" id="menuImageUrl" placeholder="https://...">
                 </div>
                 <div style="display: flex; gap: 0.5rem;">
                   <button type="submit" class="btn" id="saveMenuBtn" style="flex: 1;">บันทึกเมนู</button>
-                  <button type="button" class="btn btn-danger" id="cancelEditBtn" onclick="resetMenuForm()" style="display: none; flex: 1;">ยกเลิกแก้ไข</button>
+                  <button type="button" class="btn btn-danger" id="cancelEditBtn" onclick="resetMenuForm()" style="display: none; flex: 1;">ยกเลิก</button>
                 </div>
               </form>
             </div>
-
           </div>
 
           <div class="section-card" style="margin-top: 1.5rem;">
             <h2>🍔 รายการอาหารทั้งหมดในระบบ</h2>
-            <div style="max-height: 250px; overflow-y: auto;">
+            <div class="table-responsive" style="max-height: 220px;">
               <table>
-                <thead>
-                  <tr>
-                    <th style="width: 70px;">รูปภาพ</th>
-                    <th>ชื่อเมนู</th>
-                    <th>ราคา</th>
-                    <th style="text-align: center;">จัดการเมนู</th>
-                  </tr>
-                </thead>
+                <thead><tr><th style="width: 60px;">รูป</th><th>ชื่อเมนู</th><th>ราคา</th><th style="text-align: center;">จัดการ</th></tr></thead>
                 <tbody id="adminMenuList"></tbody>
               </table>
             </div>
           </div>
-
         </div>
 
-        <!-- โมดุลจัดการการจองโต๊ะ (สำหรับ Staff และ Admin) -->
+        <!-- โมดุลจองโต๊ะ -->
         <div class="section-card admin-full-width" style="margin-top: 1.5rem;">
-          <h2>📅 รายการจองโต๊ะล่วงหน้าจากลูกค้า (Table Reservations)</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ชื่อผู้จอง</th>
-                <th>เบอร์โทร</th>
-                <th>วันที่ / เวลา</th>
-                <th>จำนวน (ท่าน)</th>
-                <th>โต๊ะที่เลือก</th>
-                <th>สถานะ</th>
-                <th style="text-align: center;">จัดการ</th>
-              </tr>
-            </thead>
-            <tbody id="reservationTableList"></tbody>
-          </table>
+          <h2>📅 รายการจองโต๊ะล่วงหน้า</h2>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>ชื่อผู้จอง</th><th>เบอร์โทร</th><th>วัน / เวลา</th><th>จำนวน</th><th>โต๊ะ</th><th>สถานะ</th><th style="text-align: center;">จัดการ</th></tr></thead>
+              <tbody id="reservationTableList"></tbody>
+            </table>
+          </div>
         </div>
 
-        <!-- โมดุลจัดการออเดอร์ -->
+        <!-- โมดุลออเดอร์ -->
         <div class="section-card admin-full-width" style="margin-top: 1.5rem;">
-          <h2>📋 รายการคำสั่งซื้อจากลูกค้า (Orders & Billing)</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>รหัสออเดอร์</th>
-                <th>โต๊ะอาหาร</th>
-                <th>รายการอาหาร</th>
-                <th>ยอดรวม</th>
-                <th>สถานะ</th>
-                <th style="text-align: center;">จัดการออเดอร์</th>
-              </tr>
-            </thead>
-            <tbody id="orderTableList"></tbody>
-          </table>
+          <h2>📋 รายการคำสั่งซื้อจากลูกค้า</h2>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>รหัส</th><th>โต๊ะ</th><th>รายการอาหาร</th><th>ยอดรวม</th><th>สถานะ / ผู้รับออเดอร์</th><th style="text-align: center;">จัดการ</th></tr></thead>
+              <tbody id="orderTableList"></tbody>
+            </table>
+          </div>
         </div>
 
       </div>
     </div>
   </div>
 
-  <!-- Modal หน้าต่างใบเสร็จรับเงิน -->
+  <!-- Modal ใบเสร็จ -->
   <div id="receiptModal" class="modal">
     <div class="modal-content">
       <div id="printableReceipt">
         <div class="receipt-header">
           <h3>🍽️ ใบเสร็จรับเงิน / Bill</h3>
-          <p style="font-size: 0.85rem; color: #666;">Baan Na Cafe & Restaurant</p>
+          <p style="font-size: 0.8rem; color: #666;">Baan Na Cafe & Restaurant</p>
         </div>
-        <div id="receiptDetails" style="font-size: 0.9rem; margin-bottom: 1rem;"></div>
+        <div id="receiptDetails" style="font-size: 0.85rem; margin-bottom: 1rem;"></div>
       </div>
       <div style="display: flex; gap: 0.5rem;" class="no-print">
-        <button class="btn btn-success" onclick="window.print()" style="flex: 1;">🖨️ พิมพ์ใบเสร็จ</button>
+        <button class="btn btn-success" onclick="window.print()" style="flex: 1;">🖨️ พิมพ์</button>
         <button class="btn btn-danger" onclick="closeReceiptModal()" style="flex: 1;">ปิด</button>
       </div>
     </div>
   </div>
 
   <script>
-    /* ==========================================================================
-       [ตั้งค่าการเชื่อมต่อ Supabase - ใส่ Project URL และ Publishable Key ของคุณ]
-       ========================================================================== */
     const SUPABASE_URL = 'https://fymexgylzpbeoakodkap.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_qwOJ4st9LJ0ecqS6RGepVQ_TjZxlxv9';
     
     const { createClient } = supabase;
     const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    let cart = []; // เก็บสินค้าในตะกร้าชั่วคราว
+    let cart = [];
 
-    /**
-     * สร้างตัวเลือกโต๊ะ 1-25 สำหรับหน้าร้านและหน้าจอง
-     */
-    function initTableSelects() {
+    async function initTableSelects() {
       const tableSelect = document.getElementById('tableNumber');
-      const resTableSelect = document.getElementById('resTableSelect');
-      
       if (tableSelect) {
-        tableSelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกโต๊ะอาหาร --</option>';
+        tableSelect.innerHTML = '<option value="" disabled selected>-- เลือกโต๊ะ --</option>';
         for (let i = 1; i <= 25; i++) {
           tableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
-        }
-      }
-
-      if (resTableSelect) {
-        resTableSelect.innerHTML = '<option value="" disabled selected>-- เลือกหมายเลขโต๊ะ --</option>';
-        for (let i = 1; i <= 25; i++) {
-          resTableSelect.innerHTML += `<option value="โต๊ะ ${i}">โต๊ะ ${i}</option>`;
         }
       }
     }
 
     /**
-     * สลับแท็บหน้าจอ
+     * กรองโต๊ะที่ไม่ให้เลือกซ้ำ (เช็กจากการจองที่มีสถานะ 'อนุมัติแล้ว' ในวันเดียวกัน)
      */
+    async function updateAvailableTables() {
+      const dateInput = document.getElementById('resDate').value;
+      const resTableSelect = document.getElementById('resTableSelect');
+      
+      if (!dateInput) {
+        resTableSelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกวันที่ก่อนเลือกโต๊ะ --</option>';
+        return;
+      }
+
+      // ดึงข้อมูลการจองทั้งหมดใน Supabase
+      const { data: reservations } = await _supabase.from('reservations').select('*');
+      
+      // หาหมายเลขโต๊ะที่ถูกจองและได้รับอนุมัติแล้วในวันนั้น
+      const bookedTables = [];
+      if (reservations) {
+        reservations.forEach(res => {
+          if (res.date === dateInput && res.status === 'อนุมัติแล้ว') {
+            bookedTables.push(res.table_number);
+          }
+        });
+      }
+
+      resTableSelect.innerHTML = '<option value="" disabled selected>-- เลือกหมายเลขโต๊ะ --</option>';
+      for (let i = 1; i <= 25; i++) {
+        let tableName = `โต๊ะ ${i}`;
+        if (bookedTables.includes(tableName)) {
+          resTableSelect.innerHTML += `<option value="${tableName}" disabled style="color: #ccc; background: #f1f2f6;">${tableName} (ถูกจองแล้ว)</option>`;
+        } else {
+          resTableSelect.innerHTML += `<option value="${tableName}">${tableName} (ว่าง)</option>`;
+        }
+      }
+    }
+
     function switchTab(tab) {
       document.getElementById('homeTab').classList.remove('active');
       document.getElementById('customerTab').classList.remove('active');
@@ -733,6 +660,7 @@
         loadCustomerMenus();
       } else if (tab === 'reservation') {
         document.getElementById('reservationTab').classList.add('active');
+        document.getElementById('resTableSelect').innerHTML = '<option value="" disabled selected>-- กรุณาเลือกวันที่ก่อนเลือกโต๊ะ --</option>';
       } else if (tab === 'webboard') {
         document.getElementById('webboardTab').classList.add('active');
         loadWebboardPosts();
@@ -743,9 +671,6 @@
       }
     }
 
-    /**
-     * บันทึกข้อมูลการจองโต๊ะลงตาราง reservations ใน Supabase
-     */
     async function submitReservation(e) {
       e.preventDefault();
       const name = document.getElementById('resName').value.trim();
@@ -755,92 +680,52 @@
       const guests = parseInt(document.getElementById('resGuests').value);
       const table = document.getElementById('resTableSelect').value;
 
-      const newReservation = {
-        name,
-        phone,
-        date,
-        time,
-        guests,
-        table_number: table,
-        status: 'รออนุมัติ'
-      };
-
+      const newReservation = { name, phone, date, time, guests, table_number: table, status: 'รออนุมัติ' };
       const { error } = await _supabase.from('reservations').insert([newReservation]);
       if (error) {
-        alert('เกิดข้อผิดพลาดในการจองโต๊ะ: ' + error.message);
+        alert('เกิดข้อผิดพลาด: ' + error.message);
       } else {
-        alert('จองโต๊ะสำเร็จ! ทางร้านจะติดต่อกลับเพื่อยืนยันสิทธิ์');
+        alert('จองโต๊ะสำเร็จ! ทางร้านจะตรวจสอบและยืนยันสิทธิ์');
         document.getElementById('reservationForm').reset();
         switchTab('home');
       }
     }
 
-    /**
-     * โหลดโพสต์เว็บบอร์ดจาก Supabase
-     */
     async function loadWebboardPosts() {
-      const { data: posts, error } = await _supabase.from('posts').select('*').order('id', { ascending: false });
+      const { data: posts } = await _supabase.from('posts').select('*').order('id', { ascending: false });
       const boardPostList = document.getElementById('boardPostList');
       boardPostList.innerHTML = '';
-
-      if (error || !posts || posts.length === 0) {
-        boardPostList.innerHTML = '<p style="color: #666; text-align: center;">ยังไม่มีความคิดเห็นในเว็บบอร์ด เป็นคนแรกที่รีวิวเลย!</p>';
+      if (!posts || posts.length === 0) {
+        boardPostList.innerHTML = '<p style="color: #666; text-align: center;">ยังไม่มีความคิดเห็น</p>';
         return;
       }
-
       posts.forEach(post => {
         boardPostList.innerHTML += `
           <div class="post-card">
-            <div class="post-header">
-              <span class="post-author">👤 ${post.author}</span>
-              <span>🕒 ${post.time}</span>
-            </div>
+            <div class="post-header"><span class="post-author">👤 ${post.author}</span><span>🕒 ${post.time}</span></div>
             <div class="post-body">${post.content}</div>
           </div>
         `;
       });
     }
 
-    /**
-     * เพิ่มโพสต์ลง Supabase
-     */
     async function addPost(e) {
       e.preventDefault();
       const author = document.getElementById('postAuthor').value.trim();
       const content = document.getElementById('postContent').value.trim();
-
-      if (!author || !content) {
-        alert('กรุณากรอกชื่อและข้อความความคิดเห็นให้ครบถ้วน');
-        return;
-      }
-
-      const newPost = {
-        author: author,
-        content: content,
-        time: new Date().toLocaleTimeString()
-      };
-
+      const newPost = { author, content, time: new Date().toLocaleTimeString() };
       const { error } = await _supabase.from('posts').insert([newPost]);
-      if (error) {
-        alert('เกิดข้อผิดพลาดในการโพสต์: ' + error.message);
-      } else {
-        document.getElementById('webboardForm').reset();
-        loadWebboardPosts();
-        alert('โพสต์ความคิดเห็นสำเร็จ!');
-      }
+      if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } 
+      else { document.getElementById('webboardForm').reset(); loadWebboardPosts(); alert('โพสต์ความคิดเห็นสำเร็จ!'); }
     }
 
-    /**
-     * เช็กสถานะแอดมินจาก Session
-     */
     function checkAdminSession() {
       const currentStaff = JSON.parse(sessionStorage.getItem('currentStaff'));
       if (currentStaff) {
         document.getElementById('adminLoginBox').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
-        
         let roleText = currentStaff.role === 'admin' ? 'ผู้จัดการร้าน (Admin)' : 'พนักงาน (Staff)';
-        document.getElementById('loggedInUserWelcome').innerText = `เข้าสู่ระบบโดย: ${currentStaff.username} (${roleText})`;
+        document.getElementById('loggedInUserWelcome').innerText = `ผู้ใช้งาน: ${currentStaff.username} (${roleText})`;
 
         if (currentStaff.role === 'admin') {
           document.getElementById('managerOnlySection').style.display = 'block';
@@ -855,19 +740,11 @@
       }
     }
 
-    /**
-     * ล็อกอินเข้าหลังบ้านจากตาราง staffs ใน Supabase
-     */
     async function verifyAdmin() {
       const uInput = document.getElementById('loginUsername').value.trim();
       const pInput = document.getElementById('loginPassword').value.trim();
-      
       const { data: staffs, error } = await _supabase.from('staffs').select('*');
-      if (error || !staffs) {
-        alert('ไม่สามารถเชื่อมต่อฐานข้อมูลพนักงานได้');
-        return;
-      }
-
+      if (error || !staffs) { alert('เชื่อมต่อฐานข้อมูลไม่สำเร็จ'); return; }
       const staff = staffs.find(s => s.username === uInput && s.password === pInput);
       if (staff) {
         sessionStorage.setItem('currentStaff', JSON.stringify(staff));
@@ -875,7 +752,7 @@
         document.getElementById('loginPassword').value = '';
         checkAdminSession();
       } else {
-        alert('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!');
+        alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
       }
     }
 
@@ -884,35 +761,22 @@
       checkAdminSession();
     }
 
-    /**
-     * โหลดเมนูอาหารหน้าร้านจาก Supabase
-     */
     async function loadCustomerMenus() {
-      const { data: menus, error } = await _supabase.from('menus').select('*');
+      const { data: menus } = await _supabase.from('menus').select('*');
       const customerMenuList = document.getElementById('customerMenuList');
       customerMenuList.innerHTML = '';
-      
-      if (error || !menus) {
-        customerMenuList.innerHTML = '<p>ไม่สามารถโหลดเมนูอาหารได้</p>';
-        return;
-      }
+      if (!menus) { customerMenuList.innerHTML = '<p>ไม่สามารถโหลดเมนูได้</p>'; return; }
 
       menus.forEach(menu => {
-        let imgTag = menu.image 
-          ? `<img src="${menu.image}" alt="${menu.name}" class="menu-card-img">`
-          : `<div class="menu-card-img" style="display:flex; align-items:center; justify-content:center; font-size:2.5rem;">🍲</div>`;
-
+        let imgTag = menu.image ? `<img src="${menu.image}" class="menu-card-img">` : `<div class="menu-card-img" style="display:flex; align-items:center; justify-content:center; font-size:2rem;">🍲</div>`;
         customerMenuList.innerHTML += `
           <div class="menu-card">
             ${imgTag}
             <div class="menu-card-body">
-              <div>
-                <div class="menu-card-title">${menu.name}</div>
-                <div class="menu-card-price">${menu.price} บาท</div>
-              </div>
+              <div><div class="menu-card-title">${menu.name}</div><div class="menu-card-price">${menu.price} บาท</div></div>
               <div class="menu-card-action">
                 <input type="number" id="qty-${menu.id}" class="qty-input" value="1" min="1">
-                <button class="btn" style="flex: 1; padding: 0.4rem; font-size: 0.9rem;" onclick="addToCart(${menu.id})">เพิ่มลงตะกร้า</button>
+                <button class="btn" style="flex:1; padding:0.35rem; font-size:0.85rem;" onclick="addToCart(${menu.id})">เพิ่ม</button>
               </div>
             </div>
           </div>
@@ -945,12 +809,12 @@
         cartTotal.innerText = '0';
         return;
       }
-      let html = '<table><thead><tr><th>รายการ</th><th>จำนวน</th><th>ราคา/หน่วย</th><th>รวม</th><th>ลบ</th></tr></thead><tbody>';
+      let html = '<table><thead><tr><th>รายการ</th><th>จำนวน</th><th>ราคา</th><th>รวม</th><th>ลบ</th></tr></thead><tbody>';
       let total = 0;
       cart.forEach(item => {
         let sumPrice = item.price * item.qty;
         total += sumPrice;
-        html += `<tr><td>${item.name}</td><td>${item.qty}</td><td>${item.price} บาท</td><td>${sumPrice} บาท</td><td><button class="btn btn-danger" onclick="removeFromCart(${item.id})">ลบ</button></td></tr>`;
+        html += `<tr><td>${item.name}</td><td>${item.qty}</td><td>${item.price} ฿</td><td>${sumPrice} ฿</td><td><button class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.8rem;" onclick="removeFromCart(${item.id})">ลบ</button></td></tr>`;
       });
       html += '</tbody></table>';
       cartList.innerHTML = html;
@@ -959,8 +823,8 @@
 
     async function checkout() {
       const tableNumber = document.getElementById('tableNumber').value;
-      if (!tableNumber) { alert('กรุณาเลือกหมายเลขโต๊ะก่อนยืนยันการสั่งอาหารครับ'); return; }
-      if (cart.length === 0) { alert('กรุณาเลือกเมนูอาหารอย่างน้อย 1 รายการ'); return; }
+      if (!tableNumber) { alert('กรุณาเลือกโต๊ะอาหาร'); return; }
+      if (cart.length === 0) { alert('กรุณาเลือกเมนูอาหาร'); return; }
 
       const newOrder = {
         id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
@@ -968,45 +832,33 @@
         items: cart,
         total: cart.reduce((sum, i) => sum + (i.price * i.qty), 0),
         time: new Date().toLocaleTimeString(),
-        status: 'กำลังทำอาหาร'
+        status: 'กำลังทำอาหาร',
+        staff: '-'
       };
 
       const { error } = await _supabase.from('orders').insert([newOrder]);
-      if (error) {
-        alert('เกิดข้อผิดพลาดในการส่งออเดอร์: ' + error.message);
-      } else {
-        alert('ส่งคำสั่งซื้อจาก ' + tableNumber + ' สำเร็จ!');
-        cart = [];
-        document.getElementById('tableNumber').selectedIndex = 0;
-        updateCartUI();
-      }
+      if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } 
+      else { alert('สั่งอาหารจาก ' + tableNumber + ' สำเร็จ!'); cart = []; document.getElementById('tableNumber').selectedIndex = 0; updateCartUI(); }
     }
 
-    /**
-     * โหลดข้อมูลการจองและออเดอร์สำหรับพนักงาน
-     */
     async function loadOrdersAndReservationsOnly() {
-      // โหลดการจองโต๊ะ
       const { data: reservations } = await _supabase.from('reservations').select('*');
       const reservationTableList = document.getElementById('reservationTableList');
       if (reservationTableList) {
         reservationTableList.innerHTML = '';
         if (!reservations || reservations.length === 0) {
-          reservationTableList.innerHTML = `<tr><td colspan="7" style="text-align:center;">ยังไม่มีรายการจองโต๊ะล่วงหน้า</td></tr>`;
+          reservationTableList.innerHTML = `<tr><td colspan="7" style="text-align:center;">ยังไม่มีการจองโต๊ะ</td></tr>`;
         } else {
           reservations.reverse().forEach(res => {
             let statusClass = res.status === 'อนุมัติแล้ว' ? 'status-completed' : 'status-pending';
             let actionBtn = res.status === 'รออนุมัติ' 
-              ? `<button class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="approveReservation(${res.id})">อนุมัติการจอง</button>`
-              : `<span style="color:var(--success); font-weight:600;">เรียบร้อย</span>`;
+              ? `<button class="btn btn-success" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="approveReservation(${res.id})">อนุมัติ</button>`
+              : `<span style="color:var(--success); font-weight:600;">อนุมัติแล้ว</span>`;
 
             reservationTableList.innerHTML += `
               <tr>
-                <td><strong>${res.name}</strong></td>
-                <td>${res.phone}</td>
-                <td>${res.date} / ${res.time}</td>
-                <td>${res.guests} ท่าน</td>
-                <td><strong>${res.table_number}</strong></td>
+                <td><strong>${res.name}</strong></td><td>${res.phone}</td><td>${res.date} ${res.time}</td>
+                <td>${res.guests}</td><td><strong>${res.table_number}</strong></td>
                 <td><span class="${statusClass}">${res.status}</span></td>
                 <td style="text-align: center;">${actionBtn}</td>
               </tr>
@@ -1015,29 +867,29 @@
         }
       }
 
-      // โหลดออเดอร์อาหาร
       const { data: orders } = await _supabase.from('orders').select('*');
       const orderTableList = document.getElementById('orderTableList');
       if (orderTableList) {
         orderTableList.innerHTML = '';
         if (!orders || orders.length === 0) {
-          orderTableList.innerHTML = `<tr><td colspan="6" style="text-align:center;">ยังไม่มีรายการสั่งซื้อ</td></tr>`;
+          orderTableList.innerHTML = `<tr><td colspan="6" style="text-align:center;">ยังไม่มีออเดอร์</td></tr>`;
         } else {
           orders.reverse().forEach((order) => {
             let itemsStr = Array.isArray(order.items) ? order.items.map(i => `${i.name} (x${i.qty})`).join(', ') : 'รายการอาหาร';
             let statusClass = order.status === 'จัดส่งแล้ว' ? 'status-completed' : 'status-pending';
             
+            // แสดงสถานะและชื่อพนักงานผู้รับออเดอร์
+            let statusDisplay = `<span class="${statusClass}">${order.status}</span><br><small style="color:#666;">รับโดย: ${order.staff || '-'}</small>`;
+
             let actionBtn = order.status === 'กำลังทำอาหาร'
-              ? `<button class="btn btn-success" onclick="updateOrderStatus('${order.id}')">เปลี่ยนเป็นจัดส่งแล้ว</button>`
-              : `<button class="btn btn-info" onclick="openReceipt('${order.id}')">🧾 เชคบิล/ใบเสร็จ</button>`;
+              ? `<button class="btn btn-success" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="updateOrderStatus('${order.id}')">ส่งอาหาร</button>`
+              : `<button class="btn btn-info" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="openReceipt('${order.id}')">บิล</button>`;
 
             orderTableList.innerHTML += `
               <tr>
-                <td>${order.id}</td>
-                <td><strong>${order.customer}</strong></td>
-                <td>${itemsStr}</td>
-                <td>${order.total} บาท</td>
-                <td><span class="${statusClass}">${order.status}</span></td>
+                <td>${order.id}</td><td><strong>${order.customer}</strong></td>
+                <td>${itemsStr}</td><td>${order.total} ฿</td>
+                <td>${statusDisplay}</td>
                 <td style="text-align: center;">${actionBtn}</td>
               </tr>
             `;
@@ -1047,21 +899,30 @@
       }
     }
 
-    /**
-     * อนุมัติการจองโต๊ะ
-     */
     async function approveReservation(id) {
-      const { error } = await _supabase.from('reservations').update({ status: 'อนุมัติแล้ว' }).eq('id', id);
+      await _supabase.from('reservations').update({ status: 'อนุมัติแล้ว' }).eq('id', id);
+      checkAdminSession();
+    }
+
+    /**
+     * เปลี่ยนสถานะออเดอร์พร้อมบันทึกชื่อพนักงานที่กดทำรายการปัจจุบัน
+     */
+    async function updateOrderStatus(orderId) {
+      const currentStaff = JSON.parse(sessionStorage.getItem('currentStaff'));
+      const staffName = currentStaff ? currentStaff.username : 'Staff';
+
+      const { error } = await _supabase.from('orders').update({ 
+        status: 'จัดส่งแล้ว', 
+        staff: staffName 
+      }).eq('id', orderId);
+
       if (error) {
-        alert('เกิดข้อผิดพลาด: ' + error.message);
+        alert('อัปเดตไม่สำเร็จ: ' + error.message);
       } else {
         checkAdminSession();
       }
     }
 
-    /**
-     * โหลดข้อมูลหลังบ้านทั้งหมดสำหรับ Admin
-     */
     async function loadAdminData() {
       const { data: staffs } = await _supabase.from('staffs').select('*');
       const staffTableList = document.getElementById('staffTableList');
@@ -1071,11 +932,10 @@
           let roleBadge = staff.role === 'admin' ? '<span style="color:var(--primary); font-weight:bold;">Admin</span>' : 'Staff';
           staffTableList.innerHTML += `
             <tr>
-              <td><strong>${staff.username}</strong></td>
-              <td>${roleBadge}</td>
+              <td><strong>${staff.username}</strong></td><td>${roleBadge}</td>
               <td style="text-align: center;">
-                <button class="btn btn-warning" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="editStaff(${staff.id})">แก้ไข</button>
-                ${staff.username !== 'admin' ? `<button class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="deleteStaff(${staff.id})">ลบ</button>` : ''}
+                <button class="btn btn-warning" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="editStaff(${staff.id})">แก้ไข</button>
+                ${staff.username !== 'admin' ? `<button class="btn btn-danger" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="deleteStaff(${staff.id})">ลบ</button>` : ''}
               </td>
             </tr>
           `;
@@ -1087,18 +947,13 @@
       adminMenuList.innerHTML = '';
       if (menus) {
         menus.forEach(menu => {
-          let imgTag = menu.image 
-            ? `<img src="${menu.image}" alt="${menu.name}" class="menu-img">`
-            : `<div class="menu-img" style="display:flex; align-items:center; justify-content:center; font-size:1rem;">🍲</div>`;
-
+          let imgTag = menu.image ? `<img src="${menu.image}" class="menu-img">` : `<div class="menu-img" style="display:flex; align-items:center; justify-content:center; font-size:0.9rem;">🍲</div>`;
           adminMenuList.innerHTML += `
             <tr>
-              <td>${imgTag}</td>
-              <td><strong>${menu.name}</strong></td>
-              <td>${menu.price} บาท</td>
+              <td>${imgTag}</td><td><strong>${menu.name}</strong></td><td>${menu.price} ฿</td>
               <td style="text-align: center;">
-                <button class="btn btn-warning" style="padding:0.3rem 0.6rem; font-size:0.85rem;" onclick="editMenu(${menu.id})">แก้ไข</button>
-                <button class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.85rem;" onclick="deleteMenu(${menu.id})">ลบ</button>
+                <button class="btn btn-warning" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="editMenu(${menu.id})">แก้ไข</button>
+                <button class="btn btn-danger" style="padding:0.2rem 0.4rem; font-size:0.75rem;" onclick="deleteMenu(${menu.id})">ลบ</button>
               </td>
             </tr>
           `;
@@ -1115,29 +970,23 @@
       const password = document.getElementById('staffPassword').value.trim();
       const role = document.getElementById('staffRole').value;
 
-      if (editId) {
-        const { error } = await _supabase.from('staffs').update({ username, password, role }).eq('id', editId);
-        if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } 
-        else { resetStaffForm(); loadAdminData(); alert('แก้ไขข้อมูลพนักงานสำเร็จ!'); }
-      } else {
-        const { error } = await _supabase.from('staffs').insert([{ username, password, role }]);
-        if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } 
-        else { resetStaffForm(); loadAdminData(); alert('เพิ่มบัญชีพนักงานสำเร็จ!'); }
-      }
+      if (editId) { await _supabase.from('staffs').update({ username, password, role }).eq('id', editId); } 
+      else { await _supabase.from('staffs').insert([{ username, password, role }]); }
+      resetStaffForm();
+      loadAdminData();
+      alert('บันทึกพนักงานสำเร็จ!');
     }
 
     async function editStaff(id) {
       const { data: staffs } = await _supabase.from('staffs').select('*').eq('id', id);
       if (!staffs || staffs.length === 0) return;
       const staff = staffs[0];
-
       document.getElementById('editStaffId').value = staff.id;
       document.getElementById('staffUsername').value = staff.username;
       document.getElementById('staffPassword').value = staff.password;
       document.getElementById('staffRole').value = staff.role;
-
       document.getElementById('staffFormTitle').innerText = '✏️ แก้ไขพนักงาน';
-      document.getElementById('saveStaffBtn').innerText = 'บันทึกการแก้ไข';
+      document.getElementById('saveStaffBtn').innerText = 'บันทึก';
       document.getElementById('cancelStaffEditBtn').style.display = 'block';
     }
 
@@ -1145,15 +994,14 @@
       document.getElementById('addStaffForm').reset();
       document.getElementById('editStaffId').value = '';
       document.getElementById('staffFormTitle').innerText = '👤 จัดการบัญชีพนักงาน';
-      document.getElementById('saveStaffBtn').innerText = 'บันทึกพนักงาน';
+      document.getElementById('saveStaffBtn').innerText = 'บันทึก';
       document.getElementById('cancelStaffEditBtn').style.display = 'none';
     }
 
     async function deleteStaff(id) {
-      if (confirm('คุณต้องการลบบัญชีพนักงานนี้ใช่หรือไม่?')) {
-        const { error } = await _supabase.from('staffs').delete().eq('id', id);
-        if (error) { alert('ลบไม่สำเร็จ: ' + error.message); }
-        else { loadAdminData(); }
+      if (confirm('คุณต้องการลบพนักงานนี้หรือไม่?')) {
+        await _supabase.from('staffs').delete().eq('id', id);
+        loadAdminData();
       }
     }
 
@@ -1164,29 +1012,23 @@
       const price = parseFloat(document.getElementById('menuPrice').value);
       const image = document.getElementById('menuImageUrl').value.trim();
 
-      if (editId) {
-        const { error } = await _supabase.from('menus').update({ name, price, image }).eq('id', editId);
-        if (error) { alert('แก้ไขเมนูไม่สำเร็จ: ' + error.message); }
-        else { resetMenuForm(); loadAdminData(); alert('แก้ไขเมนูสำเร็จ!'); }
-      } else {
-        const { error } = await _supabase.from('menus').insert([{ name, price, image }]);
-        if (error) { alert('เพิ่มเมนูไม่สำเร็จ: ' + error.message); }
-        else { resetMenuForm(); loadAdminData(); alert('เพิ่มเมนูอาหารสำเร็จ!'); }
-      }
+      if (editId) { await _supabase.from('menus').update({ name, price, image }).eq('id', editId); } 
+      else { await _supabase.from('menus').insert([{ name, price, image }]); }
+      resetMenuForm();
+      loadAdminData();
+      alert('บันทึกเมนูสำเร็จ!');
     }
 
     async function editMenu(id) {
       const { data: menus } = await _supabase.from('menus').select('*').eq('id', id);
       if (!menus || menus.length === 0) return;
       const menu = menus[0];
-
       document.getElementById('editMenuId').value = menu.id;
       document.getElementById('menuName').value = menu.name;
       document.getElementById('menuPrice').value = menu.price;
       document.getElementById('menuImageUrl').value = menu.image || '';
-
-      document.getElementById('formTitle').innerText = '✏️ แก้ไขเมนูอาหาร';
-      document.getElementById('saveMenuBtn').innerText = 'บันทึกการแก้ไข';
+      document.getElementById('formTitle').innerText = '✏️ แก้ไขเมนู';
+      document.getElementById('saveMenuBtn').innerText = 'บันทึก';
       document.getElementById('cancelEditBtn').style.display = 'block';
     }
 
@@ -1199,19 +1041,9 @@
     }
 
     async function deleteMenu(id) {
-      if (confirm('คุณต้องการลบเมนูนี้ใช่หรือไม่?')) {
-        const { error } = await _supabase.from('menus').delete().eq('id', id);
-        if (error) { alert('ลบไม่สำเร็จ: ' + error.message); }
-        else { loadAdminData(); }
-      }
-    }
-
-    async function updateOrderStatus(orderId) {
-      const { error } = await _supabase.from('orders').update({ status: 'จัดส่งแล้ว' }).eq('id', orderId);
-      if (error) {
-        alert('อัปเดตสถานะไม่สำเร็จ: ' + error.message);
-      } else {
-        checkAdminSession();
+      if (confirm('คุณต้องการลบเมนูนี้หรือไม่?')) {
+        await _supabase.from('menus').delete().eq('id', id);
+        loadAdminData();
       }
     }
 
@@ -1220,26 +1052,25 @@
       const order = orders.find(o => o.id === orderId);
       if (!order) return;
 
-      let itemsHtml = '<table style="width:100%; font-size:0.85rem; border-collapse:collapse;">';
+      let itemsHtml = '<table style="width:100%; font-size:0.8rem; border-collapse:collapse; min-width:auto;">';
       if (Array.isArray(order.items)) {
         order.items.forEach(i => {
-          itemsHtml += `<tr><td style="padding:4px 0;">${i.name} x${i.qty}</td><td style="text-align:right; padding:4px 0;">${i.price * i.qty} ฿</td></tr>`;
+          itemsHtml += `<tr><td style="padding:3px 0;">${i.name} x${i.qty}</td><td style="text-align:right; padding:3px 0;">${i.price * i.qty} ฿</td></tr>`;
         });
       }
       itemsHtml += '</table>';
 
       document.getElementById('receiptDetails').innerHTML = `
-        <p><b>รหัสออเดอร์:</b> ${order.id}</p>
+        <p><b>รหัส:</b> ${order.id}</p>
         <p><b>โต๊ะ:</b> ${order.customer}</p>
+        <p><b>พนักงานรับออเดอร์:</b> ${order.staff || '-'}</p>
         <p><b>เวลา:</b> ${order.time}</p>
-        <hr style="border: 0.5px dashed #ccc; margin: 8px 0;">
-        <p><b>รายการอาหาร:</b></p>
+        <hr style="border: 0.5px dashed #ccc; margin: 6px 0;">
         ${itemsHtml}
-        <hr style="border: 0.5px dashed #ccc; margin: 8px 0;">
-        <p style="font-size: 1.1rem; text-align: right;"><b>ยอดรวมสุทธิ: ${order.total} บาท</b></p>
-        <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: #666;">🙏 ขอบคุณที่ใช้บริการ 🙏</p>
+        <hr style="border: 0.5px dashed #ccc; margin: 6px 0;">
+        <p style="font-size: 1rem; text-align: right;"><b>ยอดรวม: ${order.total} บาท</b></p>
+        <p style="text-align: center; margin-top: 0.8rem; font-size: 0.75rem; color: #666;">🙏 ขอบคุณที่ใช้บริการ 🙏</p>
       `;
-
       document.getElementById('receiptModal').style.display = 'flex';
     }
 
@@ -1247,7 +1078,6 @@
       document.getElementById('receiptModal').style.display = 'none';
     }
 
-    // เริ่มต้นระบบ
     initTableSelects();
     switchTab('home');
   </script>
